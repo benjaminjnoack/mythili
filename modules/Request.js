@@ -39,24 +39,6 @@ Request.prototype.endRequest = function() {
 	}
 };
 
-Request.prototype.printIssue = function(issue) {
-	console.log("Issue #" + issue.number, issue.html_url);
-	if (issue.labels instanceof Array) {
-		var labels = "";
-		for (var i = 0; i < issue.labels.length; i++) {
-			labels += issue.labels[i].name + " ";
-		};
-		console.log("Labels:", labels);
-	}
-	console.log("Title:", issue.title);
-	console.log("State:", issue.state);
-	console.log("Created By:", issue.user.login);
-	if (issue.assignee) console.log("Assigned To", issue.assignee.login);
-	console.log("Created On:", issue.created_at);
-	if (issue.closed_at) console.log("Closed On:", issue.closed_at);
-	console.log("\n");
-};
-
 Request.prototype.buildEntry = function(issue) {
 	var entry = "";
 	
@@ -83,7 +65,7 @@ Request.prototype.processBody = function() {
 	for (var i = 0; i < this.resBody.length; i++) {
 		var issue = this.resBody[i];
 		if (i === 0) {
-			console.log(issue);
+			//console.log(issue);
 		}
 		
 		this.writer.writeIssue(this.buildEntry(issue));

@@ -8,7 +8,7 @@
 	"endpoint"	: "issues",
 	"queries"	: {
 		"page"	: 1,
-		"labels": "",
+		"labels": [],
 		"state" : "all",
 		"direction" : "asc",
 		"sort": "creation"

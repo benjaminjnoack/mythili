@@ -18,7 +18,7 @@ For Example: to get the issues for this repository the config.json would look li
 	"endpoint"	: "issues",
 	"queries"	: {
 		"page"	: 1,
-		"labels": "",
+		"labels": [],
 		"state" : "all",
 		"direction" : "asc",
 		"sort": "creation"
