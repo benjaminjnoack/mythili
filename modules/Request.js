@@ -39,28 +39,6 @@ Request.prototype.endRequest = function() {
 	}
 };
 
-Request.prototype.buildEntry = function(issue) {
-	var entry = "";
-	
-	entry += "Issue #" + issue.number + " " + issue.html_url + "\n";
-	if (issue.labels instanceof Array) {
-		var labels = "";
-		for (var i = 0; i < issue.labels.length; i++) {
-			labels += issue.labels[i].name + " ";
-		};
-		entry += "Labels: " + labels + "\n";
-	}
-	entry += "Title: " + issue.title + "\n";
-	entry += "State: " + issue.state + "\n";
-	entry += "Created By: " + issue.user.login + "\n";
-	if (issue.assignee) entry += "Assigned To: " + issue.assignee.login + "\n";
-	entry += "Created On: " + issue.created_at + "\n";
-	if (issue.closed_at) entry += "Closed On: " + issue.closed_at + "\n";
-	entry += "\n";
-
-	return entry;
-};
-
 Request.prototype.processBody = function() {
 	for (var i = 0; i < this.resBody.length; i++) {
 		var issue = this.resBody[i];
@@ -68,7 +46,7 @@ Request.prototype.processBody = function() {
 			//console.log(issue);
 		}
 		
-		this.writer.writeIssue(this.buildEntry(issue));
+		this.writer.writeIssue(issue);
 	};
 	if (this.callback) return this.callback(this.res.headers);
 };
