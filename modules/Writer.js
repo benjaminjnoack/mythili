@@ -4,7 +4,8 @@ var config  = require('../config.json');
 
 var Writer = function () {
 	this.buildPath();
-	this.buildStream();	
+	this.buildStream();
+	this.writeHeader();
 };
 
 Writer.prototype.buildPath = function() {
@@ -24,26 +25,44 @@ Writer.prototype.writeIssue = function(issue) {
 	this.stream.write(this.buildEntry(issue));
 };
 
-Writer.prototype.buildEntry = function(issue) {
-	var entry = "";
-	
-	entry += "Issue #" + issue.number + " " + issue.html_url + "\n";
-	if (issue.labels instanceof Array) {
-		var labels = "";
-		for (var i = 0; i < issue.labels.length; i++) {
-			labels += issue.labels[i].name + " ";
-		};
-		entry += "Labels: " + labels + "\n";
-	}
-	entry += "Title: " + issue.title + "\n";
-	entry += "State: " + issue.state + "\n";
-	entry += "Created By: " + issue.user.login + "\n";
-	if (issue.assignee) entry += "Assigned To: " + issue.assignee.login + "\n";
-	entry += "Created On: " + issue.created_at + "\n";
-	if (issue.closed_at) entry += "Closed On: " + issue.closed_at + "\n";
-	entry += "\n";
+Writer.prototype.writeHeader = function() {
+	var header = 'Issue#'
+		+ ',Bug Description'
+		+ ',Priority' 
+		+ ',UI'
+		+ ',Created By'
+		+ ',Assigned To'
+		+ ',Created Date'
+		+ ',Status'
+		+ ',Closed Date'
+		+ ',Screen Shot'
+		+ ',Test Environment'
+		+ ',Comments\n';
 
-	return entry;
+	this.stream.write(header);
+};
+
+Writer.prototype.buildEntry = function(issue) {
+	var entry = new String();
+
+	entry += this.buildField(issue.number);
+	entry += this.buildField(issue.title);
+	entry += this.buildField(issue.priority || "no priority");
+	entry += this.buildField(issue.ui || "no ui");
+	entry += this.buildField(issue.user.login);
+	entry += this.buildField((issue.assignee) ? issue.assignee.login : "Not Assigned");
+	entry += this.buildField(issue.created_at);
+	entry += this.buildField(issue.state);
+	entry += this.buildField((issue.closed_at) ? issue.closed_at : "N/A");
+	entry += this.buildField(issue.screenshot || "no screenshot");
+	entry += this.buildField("Local");
+	entry += this.buildField(issue.commentsSection || "no comments");
+
+	return entry + "\n";
+};
+
+Writer.prototype.buildField = function(field) {
+	return "\"" + field + "\","
 };
 
 Writer.prototype.closeStream = function(callback) {
