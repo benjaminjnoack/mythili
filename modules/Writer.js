@@ -3,18 +3,19 @@ var path 	= require('path');
 var config  = require('../config.json');
 
 var Writer = function () {
+	this.buildPath();
 	this.buildStream();	
 };
 
-Writer.prototype.getPath = function() {
-	this.dir = config.dir || "/data";
+Writer.prototype.buildPath = function() {
+	this.dir = config.dir || "./data";//should use __dirname
 	this.filename = config.repoOwner + "." + config.repoName + "." + new Date().getTime() + ".csv";
-	this.filePath = path.join(this.dir, this.filename)
-	return this.filePath;
+	this.filePath = path.join(this.dir, this.filename);
 };
 
 Writer.prototype.buildStream = function(options) {
-	this.stream = fs.createWriteStream("test");
+
+	this.stream = fs.createWriteStream(this.filePath);
 	this.stream.setDefaultEncoding('utf8');
 	this.stream.on('finish', this.finished.bind(this));
 };
