@@ -1,0 +1,16 @@
+{
+	"username"	: "",
+	"password"	: "",
+	"hostName"	: "api.github.com",
+	"repoApi"	: "/repos",
+	"repoOwner"	: "",
+	"repoName" 	: "",
+	"endpoint"	: "issues",
+	"queries"	: {
+		"page"	: 1,
+		"labels": "",
+		"state" : "all",
+		"direction" : "asc",
+		"sort": "creation"
+	}
+}

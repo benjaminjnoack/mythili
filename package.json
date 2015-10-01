@@ -1,0 +1,20 @@
+{
+  "name": "mythili",
+  "version": "1.0.0",
+  "description": "##Installation",
+  "main": "mythili.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/benjaminjnoack/mythili.git"
+  },
+  "author": "benjaminjnoack",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/benjaminjnoack/mythili/issues"
+  },
+  "homepage": "https://github.com/benjaminjnoack/mythili#readme",
+  "dependencies": {}
+}
