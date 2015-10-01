@@ -2,7 +2,7 @@
 
 ##Setup
 
-1. Open the file `demoConfig.json` in a plain text editor (vim, nano, Sublime Text, or notepad will do fine)
+1. Open the file `configTemp.json` in a plain text editor (vim, nano, Sublime Text, or notepad will do fine)
 2. fill in the empty fields and save the file as `config.json`
 
 For Example: to get the issues for this repository the config.json would look like:
