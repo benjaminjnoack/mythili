@@ -1,5 +1,8 @@
 var Issue = function (issue) {
 	this.issue = issue;
+	this.priority = "None";
+	this.ui = "Not Specified";
+	this.processLabels();
 }
 
 Issue.prototype.buildEntry = function() {
@@ -7,8 +10,8 @@ Issue.prototype.buildEntry = function() {
 
 	entry += this.buildField(this.issue.number);
 	entry += this.buildField(this.issue.title);
-	entry += this.buildField(this.getPriority() || "no");
-	entry += this.buildField(this.getUI() || "no");
+	entry += this.buildField(this.priority);
+	entry += this.buildField(this.ui);
 	entry += this.buildField(this.issue.user.login);
 	entry += this.buildField((this.issue.assignee) ? this.issue.assignee.login : "Not Assigned");
 	entry += this.buildField(this.issue.created_at);
@@ -21,12 +24,17 @@ Issue.prototype.buildEntry = function() {
 	return entry + "\n";
 };
 
-Issue.prototype.getPriority = function() {
-	//look for a label high, medium low
-};
-
-Issue.prototype.getUI = function() {
-	//look for a label Precinct, Autotech, Admin
+Issue.prototype.processLabels = function() {
+	if (!this.issue.labels instanceof Array) return;
+	for (var i = 0; i < this.issue.labels.length; i++) {
+		var label = this.issue.labels[i].name;
+		
+		if (label === "High" || label === "Medium" || label === "Low") {
+			this.priority = label;
+		} else if (label === "Precinct UI" || label === "Autotech UI" || label === "Admin UI") {
+			this.ui = label;
+		}
+	};
 };
 
 Issue.prototype.getScreenshot = function() {
@@ -34,10 +42,11 @@ Issue.prototype.getScreenshot = function() {
 };
 
 Issue.prototype.getComments = function() {
-	//There is a comments field?
+	return this.issue.comments;
 };
 
 Issue.prototype.buildField = function(field) {
+	//need to escape double quotes and commas
 	return "\"" + field + "\","
 };
 

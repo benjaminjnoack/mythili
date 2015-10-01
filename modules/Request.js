@@ -43,7 +43,7 @@ Request.prototype.processBody = function() {
 	for (var i = 0; i < this.resBody.length; i++) {
 		var issue = this.resBody[i];
 		if (i === 0) {
-			//console.log(issue);
+			console.log(issue);
 		}
 		
 		this.writer.writeIssue(issue);

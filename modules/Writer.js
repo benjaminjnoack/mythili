@@ -1,7 +1,7 @@
-var fs 		= require('fs');
-var path 	= require('path');
-var config  = require('../config.json');
-var Issue   = require('./Issue.js');
+var fs 		= require('fs'),
+	path 	= require('path'),
+	config  = require('../config.json'),
+	Issue   = require('./Issue.js');
 
 var Writer = function () {
 	this.buildPath();
