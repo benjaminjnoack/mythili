@@ -12,8 +12,8 @@ var Mythili = function () {
 	this.currentPage = 1;
 };
 
-Mythili.prototype.makeRequest = function(queries) {
-	var options = new Options(queries).getOptions();
+Mythili.prototype.makeRequest = function() {
+	var options = new Options().getOptions();
 	var request = new Request(options, this.writer).send(this.handleResponse.bind(this));	
 };
 
@@ -33,6 +33,7 @@ Mythili.prototype.findLastPage = function(link) {
 };
 
 Mythili.prototype.start = function() {
+	this.commands = this.commander.getCommands();
 	this.makeRequest();
 };
 

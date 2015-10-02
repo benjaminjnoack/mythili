@@ -2,7 +2,6 @@ var Commander = function () {
 	this.argv = process.argv;
 	this.lables = null;
 	this.status = null;
-	this.processArgv();
 };
 
 Commander.prototype.processArgv = function() {
@@ -21,13 +20,22 @@ Commander.prototype.processArgv = function() {
 };
 
 Commander.prototype.processLabels = function(index) {
-	var labels = this.argv[index];
-	console.log("Found labels", labels);
+	this.labels = this.argv[index].split(',');
+	console.log("Found labels", this.labels);
 };
 
 Commander.prototype.processStatus = function(index) {
 	var status = this.argv[index];
-	console.log("Found status", status);
+	if (status === "open" || status === "closed" || status === "all") this.status = status;
+	console.log("Found status", this.status);
+};
+
+Commander.prototype.getCommands = function() {
+	this.processArgv();
+	return {
+		labels: this.labels,
+		status: this.status
+	}
 };
 
 module.exports = Commander;
