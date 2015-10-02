@@ -60,7 +60,7 @@ Issue.prototype.buildField = function(field) {
 };
 
 Issue.prototype.buildDateField = function(field) {
-	return this.buildField(new Date(field).toLocaleDateString());
+	return new Date(field).toLocaleDateString();
 };
 
 module.exports = Issue;
