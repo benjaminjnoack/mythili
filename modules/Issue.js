@@ -53,7 +53,6 @@ Issue.prototype.getComments = function() {
 };
 
 Issue.prototype.buildField = function(field) {
-	//need to escape double quotes and commas
 	field += "";
 	field = field.replace(/\"/g, '\'');
 	field = field.replace(/\,/g, '');
@@ -61,8 +60,7 @@ Issue.prototype.buildField = function(field) {
 };
 
 Issue.prototype.buildDateField = function(field) {
-	var dateString = new Date(field).toLocaleDateString();
-	return this.buildField(dateString);
+	return this.buildField(new Date(field).toLocaleDateString());
 };
 
 module.exports = Issue;
