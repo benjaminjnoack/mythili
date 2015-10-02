@@ -17,12 +17,13 @@ Mythili.prototype.makeRequest = function(queries) {
 
 Mythili.prototype.handleResponse = function(resHeaders) {
 	var link = this.headerCheck.exec(resHeaders.link);
-	if (link && !this.lastPage) this.findLastPage(link);
+	if (!this.lastPage) this.findLastPage(link);
 	console.log("Processed page %d of %s", this.currentPage++,  this.lastPage);
-	if (link) return (link[2] === "next") ? this.makeRequest(link[1]) : this.writer.closeStream();
+	return (link && link[2] === "next") ? this.makeRequest(link[1]) : this.writer.closeStream();
 };
 
 Mythili.prototype.findLastPage = function(link) {
+	if (!link) return this.lastPage = 1;
 	if (link[4] === "last") {
 		var parsedUrl = url.parse(link[3], true);
 		this.lastPage = parsedUrl.query.page;

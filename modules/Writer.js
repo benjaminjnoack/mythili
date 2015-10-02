@@ -4,6 +4,7 @@ var fs 		= require('fs'),
 	Issue   = require('./Issue.js');
 
 var Writer = function () {
+	this.issues = 0;
 	this.buildPath();
 	this.buildStream();
 };
@@ -39,6 +40,7 @@ Writer.prototype.writeHeader = function() {
 };
 
 Writer.prototype.writeIssue = function(issue) {
+	this.issues++
 	var issue = new Issue(issue);
 	this.stream.write(issue.buildEntry());
 };
@@ -48,6 +50,7 @@ Writer.prototype.closeStream = function(callback) {
 };
 
 Writer.prototype.finished = function() {
+	console.log("Found %d issues", this.issues);
 	console.log("File saved as:", this.filePath);
 };
 
