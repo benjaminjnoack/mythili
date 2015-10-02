@@ -18,7 +18,7 @@ Mythili.prototype.makeRequest = function(queries) {
 Mythili.prototype.handleResponse = function(resHeaders) {
 	var link = this.headerCheck.exec(resHeaders.link);
 	if (!this.lastPage) this.findLastPage(link);
-	console.log("Processed page %s of %d", this.currentPage++,  this.lastPage);
+	console.log("Processed page %d of %s", this.currentPage++,  this.lastPage);
 	if (link) return (link[2] === "next") ? this.makeRequest(link[1]) : this.writer.closeStream();
 };
 
