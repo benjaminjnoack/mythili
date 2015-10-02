@@ -1,3 +1,5 @@
+var Screenshot = require('./Screenshot.js');
+
 var Issue = function (issue) {
 	this.issue = issue;
 	this.priority = "None";
@@ -38,7 +40,15 @@ Issue.prototype.processLabels = function() {
 };
 
 Issue.prototype.getScreenshot = function() {
-	//?
+	if (this.issue.body) {
+		//look for a link
+		//'![data loose](https://cloud.githubusercontent.com/assets/13970435/10106185/3092e34c-6381-11e5-9327-537fb7127413.png)\r\n'
+		var regEx = /\!\[data loose\]\((.+)\)/g;
+		var match = regEx.exec(this.issue.body);
+		if (match) {
+			this.screenshot = new Screenshot(match[1]);
+		}
+	}
 };
 
 Issue.prototype.getComments = function() {
