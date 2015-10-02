@@ -25,7 +25,7 @@ For Example: to get the issues for this repository the config.json would look li
 	}
 }
 ```
-The labels field may be an array of zero or more labels
+The labels field is an array of zero or more labels
 
 ```
 ["bug", "Precinct UI"]
@@ -36,7 +36,7 @@ The state field may have one of the following values:
 all, open, closed
 ```
 
-The direction field determines the direction of the sort and may have one of the following values
+The direction field determines the direction of the sort and may have one of the following values:
 ```
 asc, desc
 ```
