@@ -9,7 +9,7 @@ var Writer = function () {
 };
 
 Writer.prototype.buildPath = function() {
-	this.dir = config.dir || "./data";//should use __dirname
+	this.dir = config.dir || path.resolve(__dirname, "..", "data");
 	this.filename = config.repoName + "." + new Date().getTime() + ".csv";
 	this.filePath = path.join(this.dir, this.filename);
 };

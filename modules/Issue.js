@@ -5,7 +5,7 @@ var Issue = function (issue) {
 	this.priority = "None";
 	this.ui = "Not Specified";
 	this.processLabels();
-}
+};
 
 Issue.prototype.buildEntry = function() {
 	var entry = new String();
