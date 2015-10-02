@@ -4,6 +4,7 @@ var Request = require('./Request.js'),
 
 var Mythili = function () {
 	this.writer = new Writer();
+	this.headerCheck = /^<([^>]+)>\; rel\=\"([\w]+)\"/;
 };
 
 Mythili.prototype.makeRequest = function(queries) {
@@ -12,8 +13,7 @@ Mythili.prototype.makeRequest = function(queries) {
 };
 
 Mythili.prototype.handleResponse = function(resHeaders) {
-	var regEx = /^<([^>]+)>\; rel\=\"([\w]+)\"/;
-	var link = regEx.exec(resHeaders.link);
+	var link = this.headerCheck.exec(resHeaders.link);
 	if (link) return (link[2] === "next") ? this.makeRequest(link[1]) : this.writer.closeStream();
 };
 

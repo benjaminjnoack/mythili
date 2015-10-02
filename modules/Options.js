@@ -46,7 +46,6 @@ Options.prototype.getOptions = function() {
 		'User-Agent': 'mythili'
 	};
 	
-	//console.dir(options);
 	return options;
 };
 
