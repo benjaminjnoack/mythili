@@ -1,4 +1,4 @@
-var Screenshot = require('./Screenshot.js');
+var url = require('url');
 
 var Issue = function (issue) {
 	this.issue = issue;
@@ -16,12 +16,12 @@ Issue.prototype.buildEntry = function() {
 	entry += this.buildField(this.ui);
 	entry += this.buildField(this.issue.user.login);
 	entry += this.buildField((this.issue.assignee) ? this.issue.assignee.login : "Not Assigned");
-	entry += this.buildField(this.issue.created_at);
+	entry += this.buildField(this.buildDateField(this.issue.created_at));
 	entry += this.buildField(this.issue.state);
-	entry += this.buildField((this.issue.closed_at) ? this.issue.closed_at : "N/A");
-	entry += this.buildField(this.getScreenshot() || "no");
+	entry += this.buildField((this.issue.closed_at) ? this.buildDateField(this.issue.closed_at) : "N/A");
+	entry += this.buildField(this.getScreenshotURL());
 	entry += this.buildField("Local");
-	entry += this.buildField(this.getComments() || "no");
+	entry += this.buildField(this.getComments());
 
 	return entry + "\n";
 };
@@ -39,16 +39,14 @@ Issue.prototype.processLabels = function() {
 	};
 };
 
-Issue.prototype.getScreenshot = function() {
+Issue.prototype.getScreenshotURL = function() {
 	if (this.issue.body) {
-		//look for a link
 		//'![data loose](https://cloud.githubusercontent.com/assets/13970435/10106185/3092e34c-6381-11e5-9327-537fb7127413.png)\r\n'
-		var regEx = /\!\[data loose\]\((.+)\)/g;
+		var regEx = /\!\[.+\]\((.+)\)/g;
 		var match = regEx.exec(this.issue.body);
-		if (match) {
-			this.screenshot = new Screenshot(match[1]);
-		}
+		if (match) return match[1];
 	}
+	return "not found";
 };
 
 Issue.prototype.getComments = function() {
@@ -57,7 +55,15 @@ Issue.prototype.getComments = function() {
 
 Issue.prototype.buildField = function(field) {
 	//need to escape double quotes and commas
-	return "\"" + field + "\","
+	field += "";
+	field = field.replace(/\"/g, '\'');
+	field = field.replace(/\,/g, '');
+	return ("\"" + field + "\",");
+};
+
+Issue.prototype.buildDateField = function(field) {
+	var dateString = new Date(field).toLocaleDateString();
+	return this.buildField(dateString);
 };
 
 module.exports = Issue;

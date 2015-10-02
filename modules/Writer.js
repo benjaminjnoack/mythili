@@ -33,7 +33,7 @@ Writer.prototype.writeHeader = function() {
 		+ ',Closed Date'
 		+ ',Screen Shot'
 		+ ',Test Environment'
-		+ ',Comments\n';
+		+ ',# of Comments\n';
 
 	this.stream.write(header);
 };

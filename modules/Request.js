@@ -31,19 +31,15 @@ Request.prototype.handleData = function(data) {
 };
 
 Request.prototype.endRequest = function() {
-	try {
-		this.resBody = JSON.parse(this.resBody);
-		this.processBody();
-	} catch (e) {
-		console.error("Error parsing the response", e)
-	}
+	this.resBody = JSON.parse(this.resBody);
+	this.processBody();
 };
 
 Request.prototype.processBody = function() {
 	for (var i = 0; i < this.resBody.length; i++) {
 		var issue = this.resBody[i];
 		if (i === 0) {
-			console.log(issue);
+			//console.log(issue);
 		}
 		
 		this.writer.writeIssue(issue);
