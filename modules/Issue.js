@@ -41,7 +41,6 @@ Issue.prototype.processLabels = function() {
 
 Issue.prototype.getScreenshotURL = function() {
 	if (this.issue.body) {
-		//'![data loose](https://cloud.githubusercontent.com/assets/13970435/10106185/3092e34c-6381-11e5-9327-537fb7127413.png)\r\n'
 		var regEx = /\!\[.+\]\((.+)\)/g;
 		var match = regEx.exec(this.issue.body);
 		if (match) return match[1];
