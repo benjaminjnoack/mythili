@@ -25,20 +25,18 @@ For Example: to get the issues for this repository the config.json would look li
 	}
 }
 ```
+The labels field may be an array of zero or more labels
 
+```
+For Example: ["bug", "Precinct UI"]
+```
+
+The state field may have one of the following values:
+```
+all, open, closed
+```
 
 
 ##TODO
 
-pagination
-
 command line for labels and status
-
-basic text
-
-reponame.[label.].timestamp.csv
-
-full responses (paginated)
-
-
-
