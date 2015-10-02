@@ -43,7 +43,8 @@ Options.prototype.getOptions = function() {
 
 	options.auth = config.username + ':' + config.password;
 	options.headers = {
-		'User-Agent': 'mythili'
+		'User-Agent': 'mythili',
+		'Accept': 'application/vnd.github.v3+json'
 	};
 	
 	return options;

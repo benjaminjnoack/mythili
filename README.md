@@ -40,8 +40,3 @@ The direction field determines the direction of the sort and may have one of the
 ```
 asc, desc
 ```
-
-
-##TODO
-
-command line for labels and status
