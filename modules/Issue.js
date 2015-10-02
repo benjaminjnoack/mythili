@@ -20,7 +20,7 @@ Issue.prototype.buildEntry = function() {
 	entry += this.buildField(this.issue.state);
 	entry += this.buildField((this.issue.closed_at) ? this.buildDateField(this.issue.closed_at) : "N/A");
 	entry += this.buildField(this.getScreenshotURL());
-	entry += this.buildField("Local");
+	entry += this.buildField("Local/PT");
 	entry += this.buildField(this.getComments());
 
 	return entry + "\n";
@@ -33,7 +33,7 @@ Issue.prototype.processLabels = function() {
 		
 		if (label === "High" || label === "Medium" || label === "Low") {
 			this.priority = label;
-		} else if (label === "Precinct UI" || label === "Autotech UI" || label === "Admin UI") {
+		} else if (label === "Precinct UI" || label === "Autotech UI" || label === "Admin UI" || label === "Client UI" || label === "NOVA IPT") {
 			this.ui = label;
 		}
 	};
