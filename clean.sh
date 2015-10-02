@@ -1,2 +1,4 @@
 #!/bin/bash
-rm data/*.csv
+echo deleted:
+find data/ -name "*.csv"
+rm data/*.csv 2> /dev/null
