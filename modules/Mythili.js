@@ -1,10 +1,12 @@
-var url		= require('url'),
-	Request = require('./Request.js'),
-	Options = require('./Options.js'),
-	Writer	= require('./Writer.js');
+var url			= require('url'),
+	Commander	= require('./Commander.js'),
+	Request 	= require('./Request.js'),
+	Options 	= require('./Options.js'),
+	Writer		= require('./Writer.js');
 
 var Mythili = function () {
 	this.writer = new Writer();
+	this.commander = new Commander();
 	this.headerCheck = /^<([^>]+)>\; rel\=\"([\w]+)\"\,\s<([^>]+)>\; rel\=\"([\w]+)\"/;
 	this.lastPage = null;
 	this.currentPage = 1;
