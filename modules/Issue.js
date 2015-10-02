@@ -21,7 +21,7 @@ Issue.prototype.buildEntry = function() {
 	entry += this.buildField((this.issue.closed_at) ? this.buildDateField(this.issue.closed_at) : "N/A");
 	entry += this.buildField(this.getScreenshotURL());
 	entry += this.buildField("Local/PT");
-	entry += this.buildField(this.getComments());
+	entry += this.buildField("");
 
 	return entry + "\n";
 };
@@ -46,10 +46,6 @@ Issue.prototype.getScreenshotURL = function() {
 		if (match) return match[1];
 	}
 	return "not found";
-};
-
-Issue.prototype.getComments = function() {
-	return this.issue.comments;
 };
 
 Issue.prototype.buildField = function(field) {
