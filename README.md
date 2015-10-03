@@ -73,7 +73,7 @@ The currently supported command line arguments are:
 ```
 
 The acceptable arguments are the same as those for `config.json`. The only difference is `--labels` which accepts a comma seperated list. If the label includes a space, wrap the labels argument in quotations as shown below.
-For Example, to search for issues with the "bug" and "help wanted labels"
+For Example, to search for issues with the "bug" and "help wanted" labels
 
 ```
 node mythili.js --labels "bug,help wanted"
