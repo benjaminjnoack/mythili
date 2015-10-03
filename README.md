@@ -24,6 +24,7 @@ For Example: to get the issues for this repository the config.json would look li
 		"sort": "creation"
 	}
 }
+```
 
 The `username` and `password` fields are only required if the repository you are trying to access is private.
 
