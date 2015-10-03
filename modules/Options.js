@@ -9,7 +9,6 @@ var Options = function (url, queries) {
 };
 
 Options.prototype.buildQueries = function() {
-	if (!this.queries) this.queries = config.queries;
 	this.queries = {
 		page: this.queries.page || config.queries.page,
 		labels: this.queries.labels || config.queries.labels,
