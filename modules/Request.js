@@ -12,7 +12,7 @@ var Request = function(options, writer) {
 Request.prototype.send = function(callback) {
 	this.callback = callback;
 	this.req = https.request(this.options, this.handleResponse.bind(this));
-	this.req.on('error', this.handeError);
+	this.req.on('error', this.handleError);
 	this.req.end();
 };
 
@@ -22,8 +22,8 @@ Request.prototype.handleResponse = function(res) {
 		.on('end', this.endRequest.bind(this));
 };
 
-Request.prototype.handeError = function(err) {
-	console.error("there was an error with the request", err);
+Request.prototype.handleError = function(err) {
+	this.callback(err, this.res.headers);
 };
 
 Request.prototype.handleData = function(data) {
@@ -31,20 +31,18 @@ Request.prototype.handleData = function(data) {
 };
 
 Request.prototype.endRequest = function() {
+	if (this.res.statusCode !== 200) return this.handleError(new Error("Bad Response"));
 	this.resBody = JSON.parse(this.resBody);
 	this.processBody();
+	this.callback(null, this.res.headers);
 };
 
 Request.prototype.processBody = function() {
 	for (var i = 0; i < this.resBody.length; i++) {
 		var issue = this.resBody[i];
-		if (i === 0) {
-			//console.log(issue);
-		}
-		
+		//if (i === 0) console.log(issue);
 		this.writer.writeIssue(issue);
 	};
-	if (this.callback) return this.callback(this.res.headers);
 };
 
 module.exports = Request;

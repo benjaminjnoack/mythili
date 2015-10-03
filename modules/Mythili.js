@@ -18,7 +18,13 @@ Mythili.prototype.makeRequest = function(url) {
 	var request = new Request(options, this.writer).send(this.handleResponse.bind(this));	
 };
 
-Mythili.prototype.handleResponse = function(resHeaders) {
+Mythili.prototype.handleResponse = function(err, resHeaders) {
+	if (err) {
+		console.log(err);
+		console.log(resHeaders);
+		return;
+	}
+	
 	var link = this.headerCheck.exec(resHeaders.link);
 	if (!this.lastPage) this.findLastPage(link);
 	console.log("Processed page %d of %s", this.currentPage++,  this.lastPage);
