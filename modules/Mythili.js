@@ -8,12 +8,13 @@ var Mythili = function () {
 	this.writer = new Writer();
 	this.commander = new Commander();
 	this.headerCheck = /^<([^>]+)>\; rel\=\"([\w]+)\"\,\s<([^>]+)>\; rel\=\"([\w]+)\"/;
+	this.queries = null;
 	this.lastPage = null;
 	this.currentPage = 1;
 };
 
-Mythili.prototype.makeRequest = function() {
-	var options = new Options().getOptions();
+Mythili.prototype.makeRequest = function(url) {
+	var options = new Options(url, this.queries).getOptions();
 	var request = new Request(options, this.writer).send(this.handleResponse.bind(this));	
 };
 
@@ -33,7 +34,7 @@ Mythili.prototype.findLastPage = function(link) {
 };
 
 Mythili.prototype.start = function() {
-	this.commands = this.commander.getCommands();
+	this.queries = this.commander.getQueries();
 	this.makeRequest();
 };
 

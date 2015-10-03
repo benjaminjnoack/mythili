@@ -1,7 +1,7 @@
 var Commander = function () {
 	this.argv = process.argv;
 	this.lables = null;
-	this.status = null;
+	this.state = null;
 };
 
 Commander.prototype.processArgv = function() {
@@ -12,8 +12,8 @@ Commander.prototype.processArgv = function() {
 			continue;
 		}
 
-		if ((arg === '-s' || arg === '--status') && this.argv[i + 1]) {
-			this.processStatus(i + 1);
+		if ((arg === '-s' || arg === '--state') && this.argv[i + 1]) {
+			this.processState(i + 1);
 			continue;
 		}
 	};
@@ -21,20 +21,18 @@ Commander.prototype.processArgv = function() {
 
 Commander.prototype.processLabels = function(index) {
 	this.labels = this.argv[index].split(',');
-	console.log("Found labels", this.labels);
 };
 
-Commander.prototype.processStatus = function(index) {
-	var status = this.argv[index];
-	if (status === "open" || status === "closed" || status === "all") this.status = status;
-	console.log("Found status", this.status);
+Commander.prototype.processState = function(index) {
+	var state = this.argv[index];
+	if (state === "open" || state === "closed" || state === "all") this.state = state;
 };
 
-Commander.prototype.getCommands = function() {
+Commander.prototype.getQueries = function() {
 	this.processArgv();
 	return {
-		labels: this.labels,
-		status: this.status
+		labels: this.labels.join(','),
+		state: this.state
 	}
 };
 

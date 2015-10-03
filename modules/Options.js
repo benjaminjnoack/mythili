@@ -5,21 +5,22 @@ var url			= require('url'),
 
 var Options = function (url, queries) {
 	this.url = url || null;
-	this.queries = this.getQueries();
+	this.queries = queries;
 };
 
-Options.prototype.getQueries = function(passed) {
-	if (!passed) return config.queries;
-	return {
-		page: passed.page || config.queries.page,
-		labels: passed.lables || config.queries.lables,
-		state: passed.state || config.queries.state,
-		direction: passed.state || config.queries.direction,
-		sort: passed.sort || config.queries.sort
+Options.prototype.buildQueries = function() {
+	if (!this.queries) this.queries = config.queries;
+	this.queries = {
+		page: this.queries.page || config.queries.page,
+		labels: this.queries.labels || config.queries.labels,
+		state: this.queries.state || config.queries.state,
+		direction: this.queries.direction || config.queries.direction,
+		sort: this.queries.sort || config.queries.sort
 	}
 };
 
 Options.prototype.buildQueryString = function() {
+	this.buildQueries();
 	var queryString = '?' + querystring.stringify(this.queries);
 	return (queryString.length > 1) ? queryString : null;
 };
