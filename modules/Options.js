@@ -41,7 +41,10 @@ Options.prototype.getDefaultOptions = function() {
 Options.prototype.getOptions = function() {
 	var options = this.url ? url.parse(this.url) : this.getDefaultOptions();
 
-	options.auth = config.username + ':' + config.password;
+	if (config.username && config.password) {
+		options.auth = config.username + ':' + config.password;
+	}
+	
 	options.headers = {
 		'User-Agent': 'mythili',
 		'Accept': 'application/vnd.github.v3+json'
