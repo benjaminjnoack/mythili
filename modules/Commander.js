@@ -7,12 +7,12 @@ var Commander = function () {
 Commander.prototype.processArgv = function() {
 	for (var i = 0; i < this.argv.length; i++) {
 		var arg = this.argv[i];
-		if ((arg === '-l' || arg === '--labels') && this.argv[i + 1]) {
+		if ((arg === '--labels') && this.argv[i + 1]) {
 			this.processLabels(i + 1);
 			continue;
 		}
 
-		if ((arg === '-s' || arg === '--state') && this.argv[i + 1]) {
+		if ((arg === '--state') && this.argv[i + 1]) {
 			this.processState(i + 1);
 			continue;
 		}
