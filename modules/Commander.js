@@ -20,7 +20,7 @@ Commander.prototype.processArgv = function() {
 };
 
 Commander.prototype.processLabels = function(index) {
-	this.labels = this.argv[index].split(',');
+	this.labels = this.argv[index];
 };
 
 Commander.prototype.processState = function(index) {
@@ -31,7 +31,7 @@ Commander.prototype.processState = function(index) {
 Commander.prototype.getQueries = function() {
 	this.processArgv();
 	return {
-		labels: this.labels.join(','),
+		labels: this.labels,
 		state: this.state
 	}
 };
