@@ -31,7 +31,7 @@ Request.prototype.handleData = function(data) {
 };
 
 Request.prototype.endRequest = function() {
-	if (this.res.statusCode !== 200) return this.handleError(new Error("Bad Response"));
+	if (this.res.statusCode !== 200) return this.handleError(new Error("Bad Response Code"));
 	this.resBody = JSON.parse(this.resBody);
 	this.processBody();
 	this.callback(null, this.res.headers);
