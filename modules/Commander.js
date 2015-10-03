@@ -10,26 +10,23 @@ var Commander = function () {
 Commander.prototype.processArgv = function() {
 	for (var i = 0; i < this.argv.length; i++) {
 		var arg = this.argv[i];
-		var argVal = this.argv[i + 1]
+		var argVal = this.argv[i + 1];
 		
-		if ((arg === '--direction') && argVal && !this.flagCheck(argVal)) {
-			this.processDirection(argVal);
-			continue;
-		}
+		if (!argVal || this.flagRegEx.test(argVal)) continue;
 
-		if ((arg === '--labels') && argVal && !this.flagCheck(argVal)) {
-			this.processLabels(argVal);
-			continue;
-		}
-
-		if ((arg === '--sort') && argVal && !this.flagCheck(argVal)) {
-			this.processSort(argVal);
-			continue;
-		}
-
-		if ((arg === '--state') && argVal && !this.flagCheck(argVal)) {
-			this.processState(argVal);
-			continue;
+		switch (arg) {
+			case '--direction':
+				this.processDirection(argVal);
+				break;
+			case '--labels':
+				this.processLabels(argVal);
+				break;
+			case '--sort':
+				this.processSort(argVal);
+				break;
+			case '--state':
+				this.processState(argVal);
+				break;
 		}
 	};
 };
@@ -48,10 +45,6 @@ Commander.prototype.processSort = function(argVal) {
 
 Commander.prototype.processState = function(argVal) {
 	if (argVal === "open" || argVal === "closed" || argVal === "all") this.state = argVal;
-};
-
-Commander.prototype.flagCheck = function(arg) {
-	return this.flagRegEx.test(arg);
 };
 
 Commander.prototype.getQueries = function() {
