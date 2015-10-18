@@ -1,5 +1,9 @@
 #Mythili
 
+Mythili is a scripted progrm for interacting with GitHub's Issues API.
+Mythili will pull down the issues for the configured repository and build a
+simple CSV file to represent the data.
+
 ##Setup
 
 1. Open the file `configTemp.json` in a plain text editor (vim, nano, Sublime Text, or Notepad will do fine)
